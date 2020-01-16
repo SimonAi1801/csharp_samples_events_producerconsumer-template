@@ -34,11 +34,25 @@ namespace ProducerConsumer.Wpf
             _queue=new Queue<Task>();
             int min = Convert.ToInt32(TextBoxProducerMinimum.Text);
             int max = Convert.ToInt32(TextBoxProducerMaximum.Text);
-            //_producer = new Producer(min, max, LogTask, _queue);
+            _producer = new Producer(min, max, LogTask, _queue);
             min = Convert.ToInt32(TextBoxConsumerMinimum.Text);
             max = Convert.ToInt32(TextBoxConsumerMaximum.Text);
-            //_consumer = new Consumer(min, max, _queue);
+            _consumer = new Consumer(min, max, _queue);
             CheckBoxIsRunning.IsChecked = true;
+            FastClock.Instance.OneMinuteIsOver += Instance_OneMinuteIsOver;
+            FastClock.Instance.IsRunning = true;
+        }
+
+        private void Instance_OneMinuteIsOver(object sender, DateTime e)
+        {
+            Title = $"Producer - Consumer, {FastClock.Instance.Time.ToShortTimeString()}";
+        }
+
+        private void LogTask(object sender, String message)
+        {
+            string text =
+                $"Queuelength: {_queue.Count}, {message}";
+            AddLineToTextBox(text);
         }
 
         /// <summary>
@@ -57,7 +71,11 @@ namespace ProducerConsumer.Wpf
 
         private void CheckBoxIsRunning_Click(object sender, RoutedEventArgs e)
         {
-            FastClock.Instance.IsRunning = CheckBoxIsRunning.IsChecked == true;
+            if (CheckBoxIsRunning.IsChecked == null)
+            {
+                return;
+            }
+            FastClock.Instance.IsRunning = CheckBoxIsRunning.IsChecked.Value;
         }
     }
 }
