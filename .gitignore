@@ -3,3 +3,9 @@
 ################################################################################
 
 /.vs
+/source/ProducerConsumer/.vs/ProducerConsumer/v16
+/source/ProducerConsumer/packages/MahApps.Metro.1.4.1
+/source/ProducerConsumer/ProducerConsumer.Core/bin/Debug
+/source/ProducerConsumer/ProducerConsumer.Core/obj/Debug
+/source/ProducerConsumer/ProducerConsumer.Wpf/bin/Debug
+/source/ProducerConsumer/ProducerConsumer.Wpf/obj
